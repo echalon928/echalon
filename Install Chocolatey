@@ -1,4 +1,7 @@
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-
-setx /M PATH "%PATH%;c:\programdata\chocolatey"
-setx /m path "%path%;c:\programdata\chocolatey"
+# Check if Chocolatey is already installed
+if (-not (Test-Path 'C:\ProgramData\chocolatey\choco.exe')) {
+    # Install Chocolatey
+    Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+} else {
+    Write-Host "Chocolatey is already installed."
+}
